@@ -1,10 +1,13 @@
-mac :
-	pyinstaller --icon Application.icns \
-	--osx-bundle-identifier us.phlux.deepdeck \
-	--onedir \
-	--windowed \
+dir :
+	pyinstaller \
 	--log-level DEBUG \
-	app.spec
+	app_works_dir.spec
 
+file :
+	pyinstaller \
+	--log-level DEBUG \
+	app_works_file.spec
 
-#  
+#	--onedir \
+#	--windowed \
+  
