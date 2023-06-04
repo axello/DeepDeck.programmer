@@ -8,6 +8,8 @@ file :
 	--log-level DEBUG \
 	app_works_file.spec
 
-#	--onedir \
-#	--windowed \
-  
+codesign :
+	codesign --display --entitlement - --xml "dist/DeepDeck Installer.app"
+
+xcode :
+	codesign --display --entitlement - --xml "/Applications/Xcode.app"
