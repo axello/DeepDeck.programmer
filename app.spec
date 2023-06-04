@@ -8,8 +8,8 @@ a = Analysis(
     ['app.py'],
     pathex=[],
     binaries=[],
-    datas=[('assets', 'assets'),('esptool/targets/stub_flasher/*.json','/esptool/./targets/stub_flasher')],
-    hiddenimports=['PIL._tkinter_finder'],
+    datas=[],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -24,22 +24,39 @@ pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
-    name='DeepDeck Installer',
-    icon='favicon.ico',
+    exclude_binaries=True,
+    name='app',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
     console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['Application.icns'],
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='app',
+)
+
+app = BUNDLE(
+    exe,
+    name='DeepDeck Installer.app',
+    icon=None,
+    bundle_identifier=None,
+    version='0.5.5',
+    info_plist={
+        'NSPrincipalClass': 'NSApplication'
+    }
 )
